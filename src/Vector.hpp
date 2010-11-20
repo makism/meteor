@@ -41,6 +41,7 @@ namespace Meteor
         float   Magnitude(void);
         float   Dot(const Vector& v) const;
         Vector  Cross(const Vector& v) const;
+        void    Normalize(void);
         float   DistanceFrom(const Vector& v) const;
 
         static const Vector One(unsigned int dimensions);
@@ -52,6 +53,7 @@ namespace Meteor
         std::vector<float> mPoints;
 
         float mMagnitude;
+        bool mHasCalculatedMagnitude;
     };
 
 }

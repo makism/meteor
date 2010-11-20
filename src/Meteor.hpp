@@ -3,6 +3,7 @@
 
 #include <math.h>
 #include <vector>
+#include <numeric>
 #ifdef __linux__
 #   include <time.h>
 #else

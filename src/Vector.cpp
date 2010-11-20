@@ -5,35 +5,37 @@ namespace Meteor
 {
 
     Vector::Vector(void)
-        : mDimensions(0), mMagnitude(0.0f)
+        : mDimensions(0), mMagnitude(0.0f), mHasCalculatedMagnitude(false)
     {
 
     }
 
     Vector::Vector(unsigned int dimensions)
-        : mDimensions(dimensions), mMagnitude(0.0f)
+        : mDimensions(dimensions), mMagnitude(0.0f), mHasCalculatedMagnitude(false)
     {
 
     }
 
 #ifndef __cplusplus_cli
     Vector::Vector(float s, ...)
-        : mDimensions(0), mMagnitude(0.0f)
+        : mDimensions(0), mMagnitude(0.0f), mHasCalculatedMagnitude(false)
     {
         va_list ap;
         va_start(ap, s);
+
         while (s) {
             mPoints.push_back(s);
             mDimensions++;
 
-            s = va_arg(ap, const char *);
+            s = va_arg(ap, const char*);
         }
+
         va_end(ap);
     }
 #endif
 
     Vector::Vector(float x, float y, float z)
-        : mDimensions(3), mMagnitude(0.0f)
+        : mDimensions(3), mMagnitude(0.0f), mHasCalculatedMagnitude(false)
     {
         mPoints.push_back(x);
         mPoints.push_back(y);
@@ -41,7 +43,7 @@ namespace Meteor
     }
 
     Vector::Vector(float x, float y, float z, float w)
-        : mDimensions(4), mMagnitude(0.0f)
+        : mDimensions(4), mMagnitude(0.0f), mHasCalculatedMagnitude(false)
     {
         mPoints.push_back(x);
         mPoints.push_back(y);
@@ -50,23 +52,24 @@ namespace Meteor
     }
 
     Vector::Vector(std::vector<float> p)
-        : mPoints(p), mMagnitude(0.0f)
+        : mPoints(p), mMagnitude(0.0f), mHasCalculatedMagnitude(false)
     {
         mDimensions = p.size();
     }
 
     Vector::Vector(float* points, unsigned int dimensions)
-        : mDimensions(dimensions), mMagnitude(0.0f)
+        : mDimensions(dimensions), mMagnitude(0.0f), mHasCalculatedMagnitude(false)
     {
         for (unsigned int i = 0; i < mDimensions; i++) {
-            mPoints.push_back( *(points+i) );
+            mPoints.push_back(*(points + i));
         }
     }
 
     Vector::Vector(const Vector& v)
-        : mMagnitude(0.0f)
     {
         mDimensions = v.mDimensions;
+        mMagnitude = v.mMagnitude;
+        mHasCalculatedMagnitude = v.mHasCalculatedMagnitude;
 
         for (unsigned int i = 0; i < mDimensions; i++) {
             mPoints.push_back(v.mPoints.at(i));
@@ -80,49 +83,58 @@ namespace Meteor
 
     float Vector::Magnitude(void)
     {
-        if (mMagnitude==0.0f) {
-            for(unsigned int i=0;i<mDimensions;i++) {
-                mMagnitude += pow(mPoints[i], 2.0f);
-            }
+        if (!mHasCalculatedMagnitude) {
+            mMagnitude = sqrt(std::inner_product(mPoints.begin(), mPoints.end(), mPoints.begin(), 0.0f));
 
-            mMagnitude = sqrt(mMagnitude);
+            mHasCalculatedMagnitude = true;
         }
 
         return mMagnitude;
     }
 
+    void Vector::Normalize(void)
+    {
+        for (unsigned int i = 0; i < mDimensions; i++) {
+            mPoints[i] /= Magnitude();
+        }
+    }
+
     void Vector::Fill(float value)
     {
-        for(unsigned int i=0; i<mDimensions; i++){
+        for (unsigned int i = 0; i < mDimensions; i++) {
             mPoints[i] = value;
         }
     }
 
     float& Vector::operator [](unsigned int offset)
     {
-        if(offset<mDimensions)
+        if (offset < mDimensions)
             return mPoints[offset];
+
         else
-            throw std::invalid_argument("Index out of boundaries."); 
+            throw std::invalid_argument("Index out of boundaries.");
     }
 
     float const& Vector::operator [](unsigned int offset) const
     {
-        if(offset<mDimensions)
+        if (offset < mDimensions)
             return mPoints[offset];
+
         else
-            throw std::invalid_argument("Index out of boundaries."); 
+            throw std::invalid_argument("Index out of boundaries.");
     }
 
-    
-    const Vector Vector::One(unsigned int dimensions) {
+
+    const Vector Vector::One(unsigned int dimensions)
+    {
         Vector v(dimensions);
         v.Fill(1.0f);
 
         return v;
     }
-    
-    const Vector Vector::Zero(unsigned int dimensions) {
+
+    const Vector Vector::Zero(unsigned int dimensions)
+    {
         Vector v(dimensions);
         v.Fill(0.0f);
 
