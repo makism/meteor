@@ -27,7 +27,7 @@ namespace Meteor
             mPoints.push_back(s);
             mDimensions++;
 
-            s = va_arg(ap, const char*);
+            s = va_arg(ap, float);
         }
 
         va_end(ap);
