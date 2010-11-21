@@ -106,19 +106,19 @@ namespace Meteor
         }
     }
 
-    float& Vector::operator [](unsigned int offset)
+    float& Vector::operator [](unsigned int index)
     {
-        if (offset < mDimensions)
-            return mPoints[offset];
+        if (index < mDimensions)
+            return mPoints[index];
 
         else
             throw std::invalid_argument("Index out of boundaries.");
     }
 
-    float const& Vector::operator [](unsigned int offset) const
+    float const& Vector::operator [](unsigned int index) const
     {
-        if (offset < mDimensions)
-            return mPoints[offset];
+        if (index < mDimensions)
+            return mPoints[index];
 
         else
             throw std::invalid_argument("Index out of boundaries.");

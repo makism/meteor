@@ -28,8 +28,8 @@ namespace Meteor
         Vector& operator +=(Vector& v);
         Vector& operator *=(const float mult);
         Vector& operator /=(const float dv);
-        float&  operator [](unsigned int offset);
-        float  const& operator [](unsigned int offset) const;
+        float&  operator [](unsigned int index);
+        float  const& operator [](unsigned int index) const;
         bool    operator  >(const Vector& v) const;
         bool    operator  <(const Vector& v) const;
         bool    operator ==(const Vector& v) const;

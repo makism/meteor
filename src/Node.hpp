@@ -9,15 +9,21 @@ namespace Meteor
     {
     public:
         Node(void);
-        Node(Vector& v);
-        Node(const Node& b);
+        Node(const Vector& vect);
+        Node(const Node& node);
         ~Node(void);
 
-        bool operator ==(Node& rhs);
-        bool operator !=(Node& rhs);
+        long unsigned int Id(void) const;
+        Vector& RefVector(void);
+
+        float& operator [](unsigned int index);
+        float const& operator [](unsigned int index) const;
+        bool operator ==(const Node& rhs) const;
+        bool operator !=(const Node& rhs) const;
 
     protected:
-        Vector& mRefVector;
+        long unsigned int mId;
+        Vector mRefVector;
     };
 
 }
