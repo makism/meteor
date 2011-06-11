@@ -27,7 +27,7 @@ namespace Meteor
             mPoints.push_back(s);
             mDimensions++;
 
-            s = va_arg(ap, float);
+            s = va_arg(ap, double);
         }
 
         va_end(ap);
@@ -51,13 +51,13 @@ namespace Meteor
         mPoints.push_back(w);
     }
 
-    Vector::Vector(std::vector<float> p)
+    Vector::Vector(const std::vector<float>& p)
         : mPoints(p), mMagnitude(0.0f), mHasCalculatedMagnitude(false)
     {
         mDimensions = p.size();
     }
 
-    Vector::Vector(float* points, unsigned int dimensions)
+    Vector::Vector(const float* points, unsigned int dimensions)
         : mDimensions(dimensions), mMagnitude(0.0f), mHasCalculatedMagnitude(false)
     {
         for (unsigned int i = 0; i < mDimensions; i++) {
@@ -101,27 +101,20 @@ namespace Meteor
 
     void Vector::Fill(float value)
     {
-        for (unsigned int i = 0; i < mDimensions; i++) {
+        for (unsigned int i = 0; i < mDimensions; i++)
             mPoints[i] = value;
-        }
     }
 
     float& Vector::operator [](unsigned int index)
     {
         if (index < mDimensions)
             return mPoints[index];
-
-        else
-            throw std::invalid_argument("Index out of boundaries.");
     }
 
     float const& Vector::operator [](unsigned int index) const
     {
         if (index < mDimensions)
             return mPoints[index];
-
-        else
-            throw std::invalid_argument("Index out of boundaries.");
     }
 
 

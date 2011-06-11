@@ -15,27 +15,27 @@ namespace Meteor
 #endif
         Vector(float x, float y, float z);
         Vector(float x, float y, float z, float w);
-        Vector(std::vector<float> p);
-        Vector(float* points, unsigned int dimensions);
+        Vector(const std::vector<float>& p);
+        Vector(const float* points, unsigned int dimensions);
         Vector(const Vector& v);
         ~Vector(void);
 
-        Vector 	operator  -(Vector& v);
-        Vector 	operator  +(Vector& v);
-        Vector 	operator  *(const float mult);
+        Vector  operator  -(Vector& v);
+        Vector  operator  +(Vector& v);
+        Vector  operator  *(const float mult);
         Vector  operator  /(const float dv);
         Vector& operator -=(Vector& v);
         Vector& operator +=(Vector& v);
         Vector& operator *=(const float mult);
         Vector& operator /=(const float dv);
         float&  operator [](unsigned int index);
-        float  const& operator [](unsigned int index) const;
+        float   const& operator [](unsigned int index) const;
         bool    operator  >(const Vector& v) const;
         bool    operator  <(const Vector& v) const;
         bool    operator ==(const Vector& v) const;
 
-        unsigned int     Dimensions(void);
-        std::vector<float>  Points(void);
+        unsigned int Dimensions(void) const;
+        std::vector<float>& Points(void) const;
 
         void    Fill(float value);
         float   Magnitude(void);
