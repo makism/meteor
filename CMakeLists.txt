@@ -7,10 +7,11 @@ set(CMAKE_BUILD_TYPE "Debug")
 #     "${PROJECT_SOURCE_DIR}/src/meteor/Macros.hpp"
 # )
 
-include_directories (${meteor_SOURCE_DIR}/../
-                        ${meteor_SOURCE_DIR}/../headers)
+include_directories (${meteor_SOURCE_DIR}/
+                        ${meteor_SOURCE_DIR}/headers)
 
 set(source_files
+    src/Vector.cpp
     src/Map.cpp
     src/Node.cpp
 )
