@@ -12,10 +12,12 @@ include_directories (${meteor_SOURCE_DIR}/
 
 set(source_files
     src/Vector.cpp
-    src/Map.cpp
     src/Node.cpp
+#     src/Map.cpp
 )
 
 add_library (Meteor ${LIB_TYPE} ${source_files})
 set_target_properties(Meteor PROPERTIES VERSION 0.9.999 SOVERSION 1)
 target_link_libraries(Meteor ${LIBS})
+
+add_subdirectory(Examples/)
