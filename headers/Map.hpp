@@ -11,15 +11,15 @@ namespace Meteor
         Map(void);
         virtual ~Map(void);
 
-        //structs::NodeContainer* container;
-        //structs::Vector* InputVector(void);
+        NodeContainer* container;
+        Vector& InputVector(void);
 
         virtual void Init(void) = 0;
         virtual void Train(void) = 0;
 
     protected:
         long unsigned int mIterations;
-        //structs:Vector* mInput;
+        structs:Vector& mInput;
     };
 
 }

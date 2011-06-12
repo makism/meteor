@@ -5,56 +5,67 @@
 namespace Meteor
 {
 
-    class METEOR_EXPORT Vector
-    {
-    public:
-        Vector(void);
-        Vector(unsigned int dimensions);
+class METEOR_EXPORT Vector
+{
+public:
+    Vector(void);
+    Vector(const int dimensions);
 #ifndef __cplusplus_cli
-        Vector(float p, ...);
+    Vector(float p, ...);
 #endif
-        Vector(float x, float y, float z);
-        Vector(float x, float y, float z, float w);
-        Vector(const std::vector<float>& p);
-        Vector(const float* points, unsigned int dimensions);
-        Vector(const Vector& v);
-        ~Vector(void);
+    Vector(float x, float y, float z);
+    Vector(float x, float y, float z, float w);
+    Vector(const std::vector<float>& p);
+    Vector(const float* points, int dimensions);
+    Vector(const Vector& v);
+    ~Vector(void);
 
-        Vector  operator  -(Vector& v);
-        Vector  operator  +(Vector& v);
-        Vector  operator  *(const float mult);
-        Vector  operator  /(const float dv);
-        Vector& operator -=(Vector& v);
-        Vector& operator +=(Vector& v);
-        Vector& operator *=(const float mult);
-        Vector& operator /=(const float dv);
-        float&  operator [](unsigned int index);
-        float   const& operator [](unsigned int index) const;
-        bool    operator  >(const Vector& v) const;
-        bool    operator  <(const Vector& v) const;
-        bool    operator ==(const Vector& v) const;
+    Vector  operator  -(Vector& v);
+    Vector  operator  +(Vector& v);
+    Vector  operator  *(const float mult);
+    Vector  operator  /(const float dv);
+    Vector& operator -=(Vector& v);
+    Vector& operator +=(Vector& v);
+    Vector& operator *=(const float mult);
+    Vector& operator /=(const float dv);
+    float&  operator [](int index);
+    float   const& operator [](int index) const;
+    bool    operator  >(const Vector& v) const;
+    bool    operator  <(const Vector& v) const;
+    bool    operator ==(const Vector& v) const;
 
-        unsigned int Dimensions(void) const;
-        std::vector<float>& Points(void) const;
+    int Dimensions(void) const;
+    std::vector<float>& Points(void) const;
 
-        void    Fill(float value);
-        float   Magnitude(void);
-        float   Dot(const Vector& v) const;
-        Vector  Cross(const Vector& v) const;
-        void    Normalize(void);
-        float   DistanceFrom(const Vector& v) const;
+    void    Fill(const float& value);
+    float   Magnitude(void);
+    float   Dot(const Vector& v) const;
+    Vector  Cross(const Vector& v) const;
+    void    Normalize(void);
+    float   DistanceFrom(const Vector& v) const;
 
-        static const Vector One(unsigned int dimensions);
-        static const Vector Zero(unsigned int dimensions);
+    static const Vector One(int dimensions);
+    static const Vector Zero(int dimensions);
+    
+    const std::string ToString(void) const;
 
-    private:
-        unsigned int mDimensions;
+private:
+    int mDimensions;
 
-        std::vector<float> mPoints;
+    std::vector<float> mPoints;
 
-        float mMagnitude;
-        bool mHasCalculatedMagnitude;
-    };
+    float mMagnitude;
+    
+    bool mHasCalculatedMagnitude;
+    
+    bool mIsNormalized;
+};
+
+// std::ostream& operator <<(std::ostream& stream, Vector& vec)
+// {
+//     stream << vec.ToString();
+//     return stream;
+// }
 
 }
 

@@ -1,30 +1,32 @@
-#ifndef _NODE_HPP
-#define _NODE_HPP
+#ifndef NODE_HPP_
+#define NODE_HPP_
 
 
-namespace Meteor
-{
+namespace Meteor {
 
-    class METEOR_EXPORT Node
-    {
-    public:
-        Node(void);
-        Node(const Vector& vect);
-        Node(const Node& node);
-        ~Node(void);
+class METEOR_EXPORT Node {
+public:
+    Node(void);
+    Node(const Vector& v);
+    Node(const Node& n);
+    virtual ~Node(void);
 
-        long unsigned int Id(void) const;
-        Vector& RefVector(void);
+    long unsigned int Id(void) const;
+    Vector& RefVector(void);
+    float* RefVectorPoints(void) const;
 
-        float& operator [](unsigned int index);
-        float const& operator [](unsigned int index) const;
-        bool operator ==(const Node& rhs) const;
-        bool operator !=(const Node& rhs) const;
+    virtual const std::string ToString(void) const;
+    
+protected:
+    /*! */
+    Vector refVector;
 
-    protected:
-        long unsigned int mId;
-        Vector mRefVector;
-    };
+    /*! */
+    long unsigned int id;
+
+    /*! */
+    static long unsigned int counter;
+};
 
 }
 

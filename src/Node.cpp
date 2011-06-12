@@ -1,56 +1,70 @@
 #include "Meteor.hpp"
 
 
-namespace Meteor
+namespace Meteor {
+
+// Reset id counter.
+long unsigned int Node::counter = 0;
+
+/*
+* Empty constructor.
+*/
+Node::Node(void)
+        : id(-1)
 {
 
-    Node::Node(void)
-    {
-    }
+}
 
-    Node::Node(const Vector& vect)
-        : mRefVector(vect)
-    {
-    }
+/*
+* Copy constructor.
+*/
+Node::Node(const Node& n)
+{
+    id = n.id;
+}
 
-    Node::Node(const Node& node)
-    {
-        mId = node.mId;
-        mRefVector = node.mRefVector;
-    }
+/*
+* Create a node with the given position.
+*/
+Node::Node(const Vector& v)
+        : id(Node::counter++)
+{
+    refVector = v;
+}
 
-    Node::~Node(void)
-    {
-    }
+/*
+* Empty destructor.
+*/
+Node::~Node(void)
+{
+}
 
-    long unsigned int Node::Id(void) const
-    {
-        return mId;
-    }
+/*
+*
+*/
+const std::string Node::ToString(void) const
+{
+    std::ostringstream oss;
+    
+    oss << "Node #" << id;
 
-    Vector& Node::RefVector(void)
-    {
-        return mRefVector;
-    }
+    return oss.str();
+}
 
-    float& Node::operator [](unsigned int index)
-    {
-        return mRefVector[index];
-    }
+/*
+*
+*/
+long unsigned int Node::Id(void) const
+{
+    return id;
+}
 
-    float const& Node::operator [](unsigned int index) const
-    {
-        return mRefVector[index];
-    }
-
-    bool Node::operator ==(const Node& rhs) const
-    {
-        return true;
-    }
-
-    bool Node::operator !=(const Node& rhs) const
-    {
-        return true;
-    }
+/*
+*
+*/
+Vector& Node::RefVector(void)
+{
+    return refVector;
+}
 
 }
