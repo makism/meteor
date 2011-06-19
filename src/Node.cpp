@@ -29,7 +29,7 @@ Node::Node(const Node& n)
 Node::Node(const Vector& v)
         : id(Node::counter++)
 {
-    refVector = v;
+    refVector = new Vector(v);
 }
 
 /*
@@ -37,6 +37,7 @@ Node::Node(const Vector& v)
 */
 Node::~Node(void)
 {
+    delete refVector;
 }
 
 /*
@@ -46,7 +47,8 @@ const std::string Node::ToString(void) const
 {
     std::ostringstream oss;
     
-    oss << "Node #" << id;
+    oss << "Node #" << id << " "
+        << refVector->ToString();
 
     return oss.str();
 }
@@ -62,7 +64,7 @@ long unsigned int Node::Id(void) const
 /*
 *
 */
-Vector& Node::RefVector(void)
+Vector* Node::RefVector(void)
 {
     return refVector;
 }

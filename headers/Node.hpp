@@ -12,14 +12,14 @@ public:
     virtual ~Node(void);
 
     long unsigned int Id(void) const;
-    Vector& RefVector(void);
+    Vector* RefVector(void);
     float* RefVectorPoints(void) const;
 
     virtual const std::string ToString(void) const;
     
 protected:
     /*! */
-    Vector refVector;
+    Vector *refVector;
 
     /*! */
     long unsigned int id;
