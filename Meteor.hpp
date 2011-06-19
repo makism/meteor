@@ -6,6 +6,7 @@
 #include <numeric>
 #include <string>
 #include <iostream>
+#include <algorithm>
 #include <sstream>
 #include <stdio.h>
 #include <stdarg.h>
