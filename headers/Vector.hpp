@@ -35,7 +35,7 @@ public:
     bool    operator ==(const Vector& v) const;
 
     int Dimensions(void) const;
-    std::vector<float>& Points(void) const;
+    std::vector<float>* Points(void) const;
 
     void    Fill(const float& value);
     float   Magnitude(void);
@@ -52,7 +52,7 @@ public:
 private:
     int mDimensions;
 
-    std::vector<float> mPoints;
+    std::vector<float>* mPoints;
 
     float mMagnitude;
     
@@ -60,12 +60,6 @@ private:
     
     bool mIsNormalized;
 };
-
-// std::ostream& operator <<(std::ostream& stream, Vector& vec)
-// {
-//     stream << vec.ToString();
-//     return stream;
-// }
 
 }
 
